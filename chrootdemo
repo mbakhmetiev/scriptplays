@@ -1,0 +1,85 @@
+Script started on 2023-09-19 17:48:30+02:00 [TERM="xterm" TTY="/dev/pts/2" COLUMNS="216" LINES="60"]
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # what chroot essentially does is creating or changing rather the apparent root directory
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # fo a[K[Kof a process and all of its children processes
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # fires[K[Kst let's create a directorty to chroot
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ r [Km -rf h[K/home/mbakhmetiev/cu[K[Ksulaco/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ mkc[Kdir -i[K[K!$
+mkdir /home/mbakhmetiev/sulaco/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # then wen[K need to copu [K[Ku [K[Ku[Ky couple of binaries we ca[K[Kwant our n[Kchrooted i[Kv[Kenvironment to run
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ mkdit[Kr /home/mn[Kbakhmetiev/sulaco/bin
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp $()e)h)ci)[1P)[1P)[1P)[1P)w)h)i)c)l) )[1P)[1P)j)[1P)h) )b)[1P)b)a)s)h)[C !$
+cp $(which bash) /home/mbakhmetiev/sulaco/bin
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp $(which bash) /home/mbakhmetiev/sulaco/bin[C[C[C[3P[C[1P[1@l[1@s
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp $(which ls) /home/mbakhmetiev/sulaco/bin[1P[1P[1@c[1@a[1@t
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ ll !$
+ll /home/mbakhmetiev/sulaco/bin
+total 1348
+drwxrwxr-x 2 mbakhmetiev mbakhmetiev    4096 Sep 19 17:51 [0m[01;34m.[0m/
+drwxrwxr-x 3 mbakhmetiev mbakhmetiev    4096 Sep 19 17:51 [01;34m..[0m/
+-rwxr-xr-x 1 mbakhmetiev mbakhmetiev 1183448 Sep 19 17:51 [01;32mbash[0m*
+-rwxr-xr-x 1 mbakhmetiev mbakhmetiev   43416 Sep 19 17:51 [01;32mcat[0m*
+-rwxr-xr-x 1 mbakhmetiev mbakhmetiev  142144 Sep 19 17:51 [01;32mls[0m*
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # te[Khen we need the libraries necessar [Ky for theses[K binaries to run
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ ldd bash
+ldd: ./bash: No such file or directory
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ ldd $(which bash)
+	linux-vdso.so.1 (0x00007fff4aadc000)
+	libtinfo.so.6 => /lib/x86_64-linux-gnu/libtinfo.so.6 (0x00007f8a15b4e000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f8a15b48000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f8a15956000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f8a15cc3000)
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # need to create nce[K[Kecessary dit[Krectories first in chroot dit[Kr
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ mkdir /home/mbakhmetiev/sulaco/li[C[C[C[C[C[C /home/mbakhmetiev/sulaco/li- /home/mbakhmetiev/sulaco/lip /home/mbakhmetiev/sulaco/li[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[Klib/x86_64-linux-gnu
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ mkdir -p /home/mbakhmetiev/sulaco/lib/x86_64-linux-gnu[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K64
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libtinfo.so.6 /home/mbakhmetiev/sulaco/lib/x86_64-linux-gnu
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libdl.so.2 !4[K$
+cp /lib/x86_64-linux-gnu/libdl.so.2 /home/mbakhmetiev/sulaco/lib/x86_64-linux-gnu
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libc.so.6 !$
+cp /lib/x86_64-linux-gnu/libc.so.6 /home/mbakhmetiev/sulaco/lib/x86_64-linux-gnu
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib64/ld-linux-x86-64.so.2 sulaco/lib64/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ ldd[K[K[K# now the same [K for ls
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ ldd $()w)h)i)c)h) )l)s)
+	linux-vdso.so.1 (0x00007fff5a1eb000)
+	libselinux.so.1 => /lib/x86_64-linux-gnu/libselinux.so.1 (0x00007f3f23938000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f3f23746000)
+	libpcre2-8.so.0 => /lib/x86_64-linux-gnu/libpcre2-8.so.0 (0x00007f3f236af000)
+	libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f3f236a9000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007f3f239a1000)
+	libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f3f23686000)
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libselinux.so.1 sulaco/lib/x86_64-linux-gnu/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libc.so.6 !~$[K[K$
+cp /lib/x86_64-linux-gnu/libc.so.6 sulaco/lib/x86_64-linux-gnu/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libpcre2-8.so.0 !$
+cp /lib/x86_64-linux-gnu/libpcre2-8.so.0 sulaco/lib/x86_64-linux-gnu/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libdl.so.2 !$
+cp /lib/x86_64-linux-gnu/libdl.so.2 sulaco/lib/x86_64-linux-gnu/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib64/ld-linux-x86-64.so.2 sulaco/lib64/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libpthread.so.0 sulaco/lib/x86_64-linux-gnu/[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # and for cat
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ ldd #[K@[K$()w)h)i)c)h) )c)a)t)
+	linux-vdso.so.1 (0x00007fff85568000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fabb5c01000)
+	/lib64/ld-linux-x86-64.so.2 (0x00007fabb5e18000)
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib/x86_64-linux-gnu/libc.so.6 sulaco/lib/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cp /lib64/ld-linux-x86-64.so.2 sulaco/lib64/
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ # let's crteat[K[K[K[Keate test file to run [K[K[K[Kcheck the `catt`[K[K` command in chroot
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ echo ""C"h"e"c"k" "i"f" "c"a"t" "i"s" "w"o"r"k"i"n"g"[C  >[K[K> ho[K[Ksulaco/l[Ktest
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ cat !$
+cat sulaco/test
+Check if cat is working
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ sudo ch[K# now let's try to chroot our new enc[Kvironment
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ sudo chroot /home/mbakhmetiev/sulaco/
+bash-5.0# ls
+bin  lib  lib64  test
+bash-5.0# cat test 
+Check if cat is working
+bash-5.0# ps
+bash: ps: command not found
+bash-5.0# mkdir testdir
+bash: mkdir: command not found
+bash-5.0# # cool, chroot is actually working
+bash-5.0# exit
+exit
+]0;mbakhmetiev@macmint: ~mbakhmetiev@macmint:~$ exit
+
+Script done on 2023-09-19 17:59:36+02:00 [COMMAND_EXIT_CODE="127"]
